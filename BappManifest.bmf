@@ -1,0 +1,12 @@
+Uuid: d916d94506734f3490e49391595d8747
+ExtensionType: 1
+Name: Log Requests to SQLite
+RepoName: log-requests-to-sqlite
+ScreenVersion: 1.0.2
+SerialVersion: 1
+MinPlatformVersion: 0
+ProOnly: False
+Author: Dominique Righetto
+ShortDescription: Log every request made by Burp to an SQLite database
+EntryPoint: build/libs/LogRequestsToSQLite.jar
+BuildCommand: gradle fatJar
