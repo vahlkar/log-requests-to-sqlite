@@ -2,8 +2,8 @@ Uuid: d916d94506734f3490e49391595d8747
 ExtensionType: 1
 Name: Log Requests to SQLite
 RepoName: log-requests-to-sqlite
-ScreenVersion: 1.0.2
-SerialVersion: 1
+ScreenVersion: 1.0.4
+SerialVersion: 2
 MinPlatformVersion: 0
 ProOnly: False
 Author: Dominique Righetto
