@@ -3,12 +3,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:4.0.0'
+//        classpath 'org.owasp:dependency-check-gradle:4.0.0'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'org.owasp.dependencycheck'
+//apply plugin: 'org.owasp.dependencycheck'
 
 group 'eu.righettod'
 version '1.0.5'
@@ -40,13 +40,13 @@ compileJava {
     sourceCompatibility '1.8'
 }
 
-dependencyCheck {
+/* dependencyCheck {
     autoUpdate = true
     failOnError = true
     failBuildOnCVSS = 1
     cveValidForHours = 12
     format = 'JSON'
-}
+} */
 
 task fatJar(type: Jar) {
     manifest {
