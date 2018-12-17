@@ -1,7 +1,9 @@
 [![Build Status](https://travis-ci.org/righettod/log-requests-to-sqlite.svg?branch=master)](https://travis-ci.org/righettod/log-requests-to-sqlite)
+[![CircleCI](https://circleci.com/gh/righettod/log-requests-to-sqlite/tree/master.svg?style=svg)](https://circleci.com/gh/righettod/log-requests-to-sqlite/tree/master)
 [![Coverity Status](https://scan.coverity.com/projects/17099/badge.svg)](https://scan.coverity.com/projects/righettod-log-requests-to-sqlite)
+[![Known Vulnerabilities](https://snyk.io/test/github/righettod/log-requests-to-sqlite/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/righettod/log-requests-to-sqlite?targetFile=build.gradle)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![BAppStore Version](https://img.shields.io/badge/BApp%20Store-v1.0.3-orange.svg)](https://portswigger.net/bappstore/d916d94506734f3490e49391595d8747)
+[![BAppStore Version](https://img.shields.io/badge/BApp%20Store-v1.0.5-orange.svg)](https://portswigger.net/bappstore/d916d94506734f3490e49391595d8747)
 
 # Log Requests to SQLite
 
@@ -70,11 +72,33 @@ Use the following command and the JAR file will be located in folder **build/lib
 $ gradlew clean fatJar
 ```
 
+# Night build
+
+This [link](https://circleci.com/api/v1.1/project/github/righettod/log-requests-to-sqlite/latest/artifacts) provide the **url** where to download a night build of the extension JAR file:
+
+```json
+[ {
+  "path" : "LogRequestsToSQLite-NightBuild.jar",
+  "pretty_path" : "LogRequestsToSQLite-NightBuild.jar",
+  "node_index" : 0,
+  "url" : "https://11-144454154-gh.circle-artifacts.com/0/LogRequestsToSQLite-NightBuild.jar"
+} ]
+```
+
+The attribute **url** must be used to download the JAR file.
+
 # BApp Store
 
 The extension is referenced [here](https://portswigger.net/bappstore/d916d94506734f3490e49391595d8747).
 
 # Change log
+
+**1.0.5**
+
+* Add new stats and update display:
+    * Add the size of the biggest request sent.
+    * Add the maximal number of requests sent by second.
+    * Review stats display to dynamically adapt data amount in KB, MB or GB.
 
 **1.0.4**
 
