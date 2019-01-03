@@ -18,8 +18,8 @@ class ActivityLogger implements IExtensionStateListener {
     /**
      * SQL instructions.
      */
-    private static final String SQL_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS ACTIVITY (LOCAL_SOURCE_IP TEXT, TARGET_URL TEXT, HTTP_METHOD TEXT, BURP_TOOL TEXT, REQUEST_RAW TEXT, SEND_DATETIME TEXT)";
-    private static final String SQL_TABLE_INSERT = "INSERT INTO ACTIVITY (LOCAL_SOURCE_IP,TARGET_URL,HTTP_METHOD,BURP_TOOL,REQUEST_RAW,SEND_DATETIME) VALUES(?,?,?,?,?,?)";
+    private static final String SQL_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS ACTIVITY (LOCAL_SOURCE_IP TEXT, TARGET_URL TEXT, HTTP_METHOD TEXT, BURP_TOOL TEXT, REQUEST_RAW TEXT, SEND_DATETIME TEXT, RESP_STATUS_CODE INT, RESP_MIMETYPE TEXT, RESPONSE_RAW TEXT)";
+    private static final String SQL_TABLE_INSERT = "INSERT INTO ACTIVITY (LOCAL_SOURCE_IP,TARGET_URL,HTTP_METHOD,BURP_TOOL,REQUEST_RAW,SEND_DATETIME,RESP_STATUS_CODE,RESP_MIMETYPE,RESPONSE_RAW) VALUES(?,?,?,?,?,?,?,?,?)";
     private static final String SQL_COUNT_RECORDS = "SELECT COUNT(HTTP_METHOD) FROM ACTIVITY";
     private static final String SQL_TOTAL_AMOUNT_DATA_SENT = "SELECT TOTAL(LENGTH(REQUEST_RAW)) FROM ACTIVITY";
     private static final String SQL_BIGGEST_REQUEST_AMOUNT_DATA_SENT = "SELECT MAX(LENGTH(REQUEST_RAW)) FROM ACTIVITY";
@@ -90,7 +90,7 @@ class ActivityLogger implements IExtensionStateListener {
      * @param reqContent Raw content of the request.
      * @throws Exception If event cannot be saved.
      */
-    void logEvent(int toolFlag, IRequestInfo reqInfo, byte[] reqContent) throws Exception {
+    void logEvent(int toolFlag, IRequestInfo reqInfo, byte[] reqContent, IResponseInfo respInfo, byte[] respContent) throws Exception {
         //Verify that the DB connection is still opened
         this.ensureDBState();
         //Insert the event into the storage
@@ -101,6 +101,9 @@ class ActivityLogger implements IExtensionStateListener {
             stmt.setString(4, callbacks.getToolName(toolFlag));
             stmt.setString(5, callbacks.getHelpers().bytesToString(reqContent));
             stmt.setString(6, LocalDateTime.now().format(this.datetimeFormatter));
+            stmt.setShort(7, respInfo.getStatusCode());
+            stmt.setString(8, respInfo.getStatedMimeType());
+            stmt.setString(9, callbacks.getHelpers().bytesToString(respContent));
             int count = stmt.executeUpdate();
             if (count != 1) {
                 this.trace.writeLog("Request was not inserted, no detail available (insertion counter = " + count + ") !");
